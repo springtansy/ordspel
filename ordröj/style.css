@@ -296,3 +296,34 @@ footer a {
         font-size: 10px;
     }
 }
+
+/* RESTART BUTTON */
+
+#restart-button {
+    padding: 12px 28px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: var(--correct);
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+#restart-button:hover {
+    opacity: 0.85;
+}
+
+#restart-button:active {
+    transform: scale(0.96);
+}
+
+#restart-button[hidden] {
+    display: none;
+}
