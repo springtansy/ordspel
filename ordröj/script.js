@@ -25,6 +25,7 @@ const board = document.getElementById("game-board");
 const keyboard = document.getElementById("keyboard");
 const message = document.getElementById("message");
 const lengthSelector = document.getElementById("word-length");
+const restartButton = document.getElementById("restart-button");
 
 // =========================
 // GAME STATE
@@ -91,6 +92,8 @@ function newGame() {
 
     board.innerHTML = "";
     keyboard.innerHTML = "";
+
+    restartButton.hidden = true;
 
     showMessage("");
 
@@ -254,7 +257,6 @@ function submitGuess() {
     showMessage("");
 
     const guess = currentGuess;
-
     const result = checkGuess(guess);
 
     guesses.push({
@@ -267,17 +269,23 @@ function submitGuess() {
 
     currentGuess = "";
 
+    // WIN
     if (guess === answer) {
         gameOver = true;
 
         showMessage(`Grattis! Det tog ${guesses.length} försök.`);
+        restartButton.hidden = false;
+
         return;
     }
 
+    // LOSS
     if (guesses.length >= MAX_GUESSES) {
         gameOver = true;
 
         showMessage(`Tyvärr! Ordet var ${answer}.`);
+        restartButton.hidden = false;
+
         return;
     }
 
@@ -307,7 +315,7 @@ function checkGuess(guess) {
         }
     }
 
-    // Second pass: letters in wrong positions
+    // Second pass: wrong positions
     for (let i = 0; i < wordLength; i++) {
         if (result[i] === 0) continue;
 
@@ -368,7 +376,6 @@ function updateKeyboard(guess, result) {
 
     for (let i = 0; i < letters.length; i++) {
         const letter = letters[i];
-
         const state = classes[result[i]];
 
         if (
@@ -408,11 +415,20 @@ lengthSelector.addEventListener("change", () => {
 });
 
 // =========================
+// RESTART BUTTON
+// =========================
+
+restartButton.addEventListener("click", () => {
+    newGame();
+});
+
+// =========================
 // INITIALIZE
 // =========================
 
 async function initializeGame() {
     lengthSelector.disabled = true;
+    restartButton.hidden = true;
 
     showMessage("Laddar ordlista...");
 
