@@ -1,0 +1,298 @@
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+    --correct: #6aaa64;
+    --present: #c9b458;
+    --absent: #787c7e;
+
+    --border: #d3d6da;
+    --background: #ffffff;
+    --text: #202124;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    text-align: center;
+    padding: 20px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 30px 15px;
+}
+
+#game {
+    width: 100%;
+    max-width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 25px;
+}
+
+/* =========================
+   WORD LENGTH SELECTOR
+========================= */
+
+#length-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#length-selector label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#word-length {
+    padding: 9px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    background: white;
+    color: var(--text);
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* =========================
+   GAME BOARD
+========================= */
+
+#game-board {
+    --word-length: 5;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(var(--word-length), minmax(0, 1fr));
+
+    width: min(100%, calc(var(--word-length) * 65px));
+
+    gap: 5px;
+}
+
+.tile {
+    aspect-ratio: 1;
+
+    border: 2px solid var(--border);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(18px, 5vw, 28px);
+    font-weight: bold;
+
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.tile.filled {
+    border-color: #878a8c;
+}
+
+.tile.correct {
+    background: var(--correct);
+    border-color: var(--correct);
+    color: white;
+}
+
+.tile.present {
+    background: var(--present);
+    border-color: var(--present);
+    color: white;
+}
+
+.tile.absent {
+    background: var(--absent);
+    border-color: var(--absent);
+    color: white;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+    min-height: 20px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+/* =========================
+   KEYBOARD
+========================= */
+
+#keyboard {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.key {
+    flex: 1;
+    max-width: 45px;
+    height: 55px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #d3d6da;
+    color: var(--text);
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.key.wide {
+    max-width: 70px;
+    font-size: 12px;
+}
+
+.key.correct {
+    background: var(--correct);
+    color: white;
+}
+
+.key.present {
+    background: var(--present);
+    color: white;
+}
+
+.key.absent {
+    background: var(--absent);
+    color: white;
+}
+
+.key:active {
+    transform: scale(0.94);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 20px;
+
+    border-top: 1px solid var(--border);
+
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+}
+
+footer details {
+    max-width: 500px;
+    margin: auto;
+}
+
+footer summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px;
+}
+
+footer p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+footer a {
+    color: inherit;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    main {
+        padding: 20px 10px;
+    }
+
+    #game {
+        gap: 20px;
+    }
+
+    .key {
+        height: 48px;
+        font-size: 14px;
+    }
+
+    .key.wide {
+        font-size: 10px;
+    }
+}
